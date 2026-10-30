@@ -1,15 +1,16 @@
-# ScamShield Email Guard
+# CashCow Mail
 
-Forward any email to ScamShield (check@mail.cashcowai.online) and get a scam check back in
-about a minute. With Gmail auto-forwarding, every new email is checked and you're alerted only
-when something looks wrong.
+Private dashboard for CashCow email campaigns. Only the CashCow accounts listed in
+MAIL_ADMIN_EMAILS on the server can get in.
 
-- Add and confirm up to 3 email addresses (a link is emailed to prove each one is yours).
-- Step-by-step Gmail setup; Email Guard passes along Gmail's forwarding code automatically.
-- History of recent checks. Emails themselves aren't stored; only sender, subject and result.
+- Campaigns: write, preview, scan, send yourself a test, then send now or schedule.
+- Campaign scanner: must pass before anything can be sent (spam words, risky or look-alike
+  links, broken links, misleading subjects, health wording, missing pieces).
+- People: subscribers, who's waiting to confirm, unsubscribes and bounces. Add people who agreed to get email.
+- Inbox: replies are scanned like ScamShield. Scams stay out, unsubscribe requests are handled
+  automatically, and leads and replies are forwarded with a safety note.
 
-Its own subscription through CashCow: $2.99/mo, $19.99/yr or $39.99 once.
-The scanning runs on the CashCow server (mail.py in CashCow-).
+The sending, scanning and database live on the CashCow server (mail.py and cashcow_mail.sql in CashCow-).
 
 ## Render (Static Site)
 - Build command: `npm install && npm run build`
