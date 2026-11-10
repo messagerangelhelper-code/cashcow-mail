@@ -456,19 +456,20 @@ function Dashboard({ info, go }) {
   );
 }
 
-// LeadReplyRadar lives inside CashCow Mail: the live app (with its AI tools) opens right here.
+// Apps pinned inside CashCow Mail: the live app opens right here.
 const RADAR_URL = "https://leadreplyradar.onrender.com";
-function LeadRadar() {
+const PLATETRACE_URL = "https://platetrace-ptp3.onrender.com";
+function PinnedApp({ name, url }) {
   return (
     <section className="card" style={{ padding: 0, overflow: "hidden" }}>
       <div className="row-between" style={{ padding: "12px 16px" }}>
-        <h1 style={{ margin: 0 }}>LeadReplyRadar</h1>
-        <a className="link" href={RADAR_URL} target="_blank" rel="noreferrer">Open full screen</a>
+        <h1 style={{ margin: 0 }}>{name}</h1>
+        <a className="link" href={url} target="_blank" rel="noreferrer">Open full screen</a>
       </div>
       <iframe
-        title="LeadReplyRadar"
-        src={RADAR_URL}
-        allow="autoplay; clipboard-write"
+        title={name}
+        src={url}
+        allow="autoplay; clipboard-write; camera"
         style={{ display: "block", width: "100%", height: "calc(100vh - 190px)", minHeight: 560, border: 0, background: "#0b1220" }}
       />
     </section>
@@ -520,15 +521,16 @@ export default function App() {
     <>
       <Setup info={info} />
       <nav className="tabs" aria-label="CashCow Mail">
-        {[["dashboard", "Home"], ["campaigns", "Campaigns"], ["subscribers", "People"], ["inbox", "Inbox"], ["radar", "Lead Radar"]].map(([id, label]) => (
-          <button key={id} type="button" className={tab === id ? "tab on" : "tab"} aria-pressed={tab === id} onClick={() => setTab(id)} style={id === "radar" ? { gridColumn: "1 / -1" } : undefined}>{label}</button>
+        {[["dashboard", "Home"], ["campaigns", "Campaigns"], ["subscribers", "People"], ["inbox", "Inbox"], ["radar", "Lead Radar"], ["platetrace", "PlateTrace"]].map(([id, label]) => (
+          <button key={id} type="button" className={tab === id ? "tab on" : "tab"} aria-pressed={tab === id} onClick={() => setTab(id)} style={id === "radar" || id === "platetrace" ? { gridColumn: "span 2" } : undefined}>{label}</button>
         ))}
       </nav>
       {tab === "dashboard" && <Dashboard info={info} go={setTab} />}
       {tab === "campaigns" && <Campaigns info={info} />}
       {tab === "subscribers" && <Subscribers info={info} />}
       {tab === "inbox" && <Inbox info={info} />}
-      {tab === "radar" && <LeadRadar />}
+      {tab === "radar" && <PinnedApp name="LeadReplyRadar" url={RADAR_URL} />}
+      {tab === "platetrace" && <PinnedApp name="PlateTrace" url={PLATETRACE_URL} />}
     </>
   );
 
